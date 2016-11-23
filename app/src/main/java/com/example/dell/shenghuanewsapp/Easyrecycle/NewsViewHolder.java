@@ -1,55 +1,36 @@
 package com.example.dell.shenghuanewsapp.Easyrecycle;
 
-import android.graphics.Bitmap;
-import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
-import com.example.dell.shenghuanewsapp.HtmlData.MeiNv;
+import com.example.dell.shenghuanewsapp.HtmlData.News;
+import com.example.dell.shenghuanewsapp.R;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 
 /**
  * Created by Administrator on 2016/11/17.
  */
-public class NewsViewHolder extends BaseViewHolder<MeiNv> {
-    ImageView imgPicture;
-
+public class NewsViewHolder extends BaseViewHolder<News> {
+    private TextView mTv_name;
+    private ImageView mImg_face;
+    private TextView mTv_sign;
 
     public NewsViewHolder(ViewGroup parent) {
-        super(new ImageView(parent.getContext()));
-        imgPicture = (ImageView) itemView;
-        imgPicture.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        imgPicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-    }
+        super(parent, R.layout.news_recycler_item);
+        mTv_name = $(R.id.person_name);
+        mTv_sign = $(R.id.person_sign);
+        mImg_face = $(R.id.person_face);    }
 
     @Override
-    public void setData(MeiNv data) {
-        //super.setData(data);
-        final DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
+    public void setData(final News data) {
+        mTv_name.setText(data.getTitle());
+        mTv_sign.setText(data.getCtime());
         Glide.with(getContext())
                 .load(data.getPicUrl())
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
-                        int width = dm.widthPixels / 2 - 10;
-                        int height = bitmap.getHeight() * width / bitmap.getWidth();
-
-                        ViewGroup.LayoutParams params = imgPicture.getLayoutParams();
-                        params.height = height;
-                        params.width = width;
-                        imgPicture.setLayoutParams(params);
-                        imgPicture.setScaleType(ImageView.ScaleType.FIT_XY);
-                        imgPicture.setImageBitmap(bitmap);
-                    }
-                });
-
-
+                .placeholder(R.mipmap.ic_launcher)
+                .centerCrop()
+                .into(mImg_face);
     }
 }

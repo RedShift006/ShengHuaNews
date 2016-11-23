@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.dell.shenghuanewsapp.Activity.BaseActivity;
+import com.example.dell.shenghuanewsapp.fragment.MeiNvFragment;
 import com.example.dell.shenghuanewsapp.fragment.NewsFragment;
 
 public class MainActivity extends BaseActivity
@@ -25,7 +29,14 @@ public class MainActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        NewsFragment fragment = new NewsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
+
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,7 +45,7 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        NewsFragment fragment = new NewsFragment();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -86,16 +97,30 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            NewsFragment fragment = new NewsFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment);
+            transaction.commit();
+
         } else if (id == R.id.nav_gallery) {
-
+            Toast.makeText(getApplicationContext(),
+                    "还在开发中O_O", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_slideshow) {
-
+            MeiNvFragment fragment=new MeiNvFragment();
+            FragmentManager fragmentManager=getSupportFragmentManager();
+            FragmentTransaction transaction=fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragment_container,fragment);
+            transaction.commit();
         } else if (id == R.id.nav_manage) {
-
+            Toast.makeText(getApplicationContext(),
+                    "还在开发中O_O", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_share) {
-
+            Toast.makeText(getApplicationContext(),
+                    "还在开发中O_O", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_send) {
-
+            Toast.makeText(getApplicationContext(),
+                    "还在开发中O_O", Toast.LENGTH_LONG).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

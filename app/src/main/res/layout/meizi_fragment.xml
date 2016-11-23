@@ -4,10 +4,8 @@
               android:layout_height="match_parent"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
-
-
     <com.jude.easyrecyclerview.EasyRecyclerView
-
+        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +16,5 @@
         app:recyclerPaddingRight="8dp"
         app:recyclerPaddingTop="8dp"
         app:scrollbarStyle="insideOverlay"
-        app:scrollbars="none"
-        />
-
+        app:scrollbars="none" />
 </LinearLayout>
